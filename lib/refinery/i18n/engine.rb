@@ -33,7 +33,6 @@ module Refinery
             else
               ::I18n.locale = ::Refinery::I18n.default_frontend_locale
             end
-            Globalize.locale = ::I18n.locale
           end
 
           prepend_before_action :find_or_set_locale
@@ -51,15 +50,6 @@ module Refinery
           end
 
           def globalize!
-            if ::Refinery::I18n.frontend_locales.any?
-              if params[:switch_locale]
-                Globalize.locale = params[:switch_locale].to_sym
-              elsif ::I18n.locale != ::Refinery::I18n.default_frontend_locale
-                Globalize.locale = ::Refinery::I18n.default_frontend_locale
-              else
-                Globalize.locale = ::I18n.locale
-              end
-            end
           end
           # globalize! should be prepended first so that it runs after find_or_set_locale
           prepend_before_action :globalize!, :find_or_set_locale

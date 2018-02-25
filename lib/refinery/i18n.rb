@@ -42,9 +42,7 @@ module Refinery
       end
 
       def current_frontend_locale
-        if Globalize.locale.present? && Globalize.locale.to_s != config.default_frontend_locale.to_s
-          Globalize.locale
-        elsif config.default_frontend_locale.present?
+        if config.default_frontend_locale.present?
           config.default_frontend_locale
         else
           ::I18n.locale
